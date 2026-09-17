@@ -418,6 +418,15 @@ const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
     attribution: '&copy; OpenStreetMap contributors'
 });
 
+// Additional basemap layers
+const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: '&copy; Esri'
+});
+
+const topographyLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenTopoMap'
+});
+
 // Set initial layer
 let currentLayer = 'minimal';
 minimalLayer.addTo(map);
@@ -458,6 +467,38 @@ detailedToggle.addEventListener('change', function() {
         // Switch to minimal
         map.removeLayer(osmLayer);
         minimalLayer.addTo(map);
+    }
+});
+
+// Satellite basemap toggle
+const satelliteToggle = document.getElementById('satelliteToggle');
+let isSatelliteMode = false;
+
+satelliteToggle.addEventListener('change', function() {
+    isSatelliteMode = this.checked;
+    
+    if (isSatelliteMode) {
+        satelliteLayer.addTo(map);
+        // Bring satellite to front
+        satelliteLayer.bringToFront();
+    } else {
+        map.removeLayer(satelliteLayer);
+    }
+});
+
+// Topography basemap toggle
+const topographyToggle = document.getElementById('topographyToggle');
+let isTopographyMode = false;
+
+topographyToggle.addEventListener('change', function() {
+    isTopographyMode = this.checked;
+    
+    if (isTopographyMode) {
+        topographyLayer.addTo(map);
+        // Bring topography to front
+        topographyLayer.bringToFront();
+    } else {
+        map.removeLayer(topographyLayer);
     }
 });
 
