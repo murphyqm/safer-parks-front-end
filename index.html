@@ -559,11 +559,17 @@ cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","p
                 <label class="toggle-label">
                     <input type="checkbox" id="satelliteToggle" role="switch" aria-label="Toggle satellite imagery basemap on or off"/>
                     <span>Satellite Imagery</span>
+                    <button type="button" class="info-icon-btn" onclick="openModal('modal-satellite')" aria-label="Information about Satellite Imagery">
+                        <img src="css/icon.svg" alt="Info" style="width: 100%; height: 100%;">
+                    </button>
                 </label>
                 
                 <label class="toggle-label">
                     <input type="checkbox" id="topographyToggle" role="switch" aria-label="Toggle topography basemap on or off"/>
                     <span>Topography</span>
+                    <button type="button" class="info-icon-btn" onclick="openModal('modal-topography')" aria-label="Information about Topography">
+                        <img src="css/icon.svg" alt="Info" style="width: 100%; height: 100%;">
+                    </button>
                 </label>
                 
                 <label class="toggle-label">
@@ -733,6 +739,69 @@ cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","p
                 <section id="where-is-the-data-from-9" class="level3">
                 <h3 class="anchored" data-anchor-id="where-is-the-data-from-9">Where is the data from?</h3>
                 <p>This layer uses data from Open Street Maps. Street lighting data may not capture all assets. Verify with local authority records and on-the-ground knowledge, and ensure lights are regularly checked sand maintained.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-satellite">
+        <div class="modal-box">
+            <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+            <h3 class="modal-title">Satellite Imagery</h3>
+            <div class="modal-content" id="content-satellite">
+                Satellite and aerial imagery providing a detailed photographic view of the landscape.
+                <hr>
+
+                <section id="what-is-this-layer-satellite" class="level3">
+                <h3 class="anchored" data-anchor-id="what-is-this-layer-satellite">What is this layer?</h3>
+                <p>Satellite imagery showing aerial photographs of the landscape, captured from satellites orbiting Earth. This layer provides a realistic view of land cover, buildings, vegetation, and terrain as they appear from above.</p>
+                </section>
+                <section id="how-to-use-this-information-satellite" class="level3">
+                <h3 class="anchored" data-anchor-id="how-to-use-this-information-satellite">How to use this information</h3>
+                <p>Use this layer to see ground-truth views of your park and surrounding area:</p>
+                <ul>
+                <li><p><strong>Visual verification:</strong> See actual land cover, vegetation patterns, and features to verify analytical data against reality.</p></li>
+                <li><p><strong>Infrastructure assessment:</strong> Identify buildings, pathways, parking areas, and other infrastructure within and around the park.</p></li>
+                <li><p><strong>Context:</strong> Combine with other analytical layers to see how data correlates with physical features visible on the ground.</p></li>
+                <li><p><strong>Planning:</strong> Visualize potential development areas, vegetation density, and existing park features for planning purposes.</p></li>
+                </ul>
+                </section>
+                <section id="where-is-the-data-from-satellite" class="level3">
+                <h3 class="anchored" data-anchor-id="where-is-the-data-from-satellite">Where is the data from?</h3>
+                <p>This layer uses satellite imagery from <a href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9" target="_blank">Esri World Imagery</a>, which provides high-resolution satellite and aerial imagery from multiple sources including DigitalGlobe, GeoEye, and Airbus.</p>
+                <p><strong>License:</strong> Esri World Imagery is provided by Esri and its data partners under the <a href="https://www.esriuk.com/en-gb/content/products?esri-world-imagery-service" target="_blank">Esri Standard License Terms</a>. Imagery is available for public use including research and analysis.</p>
+                <p><strong>Coverage:</strong> This layer is available at all zoom levels for global coverage.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-topography">
+        <div class="modal-box">
+            <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+            <h3 class="modal-title">Topography</h3>
+            <div class="modal-content" id="content-topography">
+                A terrain and elevation map showing detailed topographic features of the landscape.
+                <hr>
+                <p><strong>Note:</strong> This layer is only available for viewing at zoom levels 1–15. At higher zoom levels (16+), the layer is automatically hidden.</p>
+
+                <section id="what-is-this-layer-topography" class="level3">
+                <h3 class="anchored" data-anchor-id="what-is-this-layer-topography">What is this layer?</h3>
+                <p>A detailed topographic map displaying terrain features, elevation contours, and relief shading. This layer helps visualize the landscape's natural topography and identify geographical features like hills, valleys, and slopes.</p>
+                </section>
+                <section id="how-to-use-this-information-topography" class="level3">
+                <h3 class="anchored" data-anchor-id="how-to-use-this-information-topography">How to use this information</h3>
+                <p>Use this layer to understand the physical geography and terrain characteristics of your park and surrounding area:</p>
+                <ul>
+                <li><p><strong>Terrain understanding:</strong> Identify slopes, elevation changes, and relief features that may affect park access and usage patterns.</p></li>
+                <li><p><strong>Layout planning:</strong> Understand how natural topography influences pathway design, visibility, and accessibility within the park.</p></li>
+                <li><p><strong>Context:</strong> Combine with other layers to understand how terrain relates to safety, accessibility, and active travel routes.</p></li>
+                </ul>
+                </section>
+                <section id="where-is-the-data-from-topography" class="level3">
+                <h3 class="anchored" data-anchor-id="where-is-the-data-from-topography">Where is the data from?</h3>
+                <p>This layer uses data from <a href="https://opentopomap.org/" target="_blank">OpenTopoMap</a>, which provides free and open-source topographic map data based on OpenStreetMap and SRTM (Shuttle Radar Topography Mission) elevation data.</p>
+                <p><strong>License:</strong> OpenTopoMap is licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a>. The underlying data includes OpenStreetMap contributors (© OpenStreetMap) and SRTM data.</p>
                 </section>
             </div>
         </div>
@@ -1394,8 +1463,18 @@ cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","p
         // Topography basemap toggle
         const topographyToggle = document.getElementById('topographyToggle');
         let isTopographyMode = false;
+        const TOPOGRAPHY_MAX_ZOOM = 15; // Maximum zoom level for topography layer
         
         topographyToggle.addEventListener('change', function() {
+            const currentZoom = map.getZoom();
+            
+            // If trying to enable at too high zoom level, show modal and uncheck
+            if (this.checked && currentZoom > TOPOGRAPHY_MAX_ZOOM) {
+                this.checked = false;
+                openModal('modal-topography');
+                return;
+            }
+            
             isTopographyMode = this.checked;
             
             if (isTopographyMode) {
@@ -1404,6 +1483,23 @@ cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","p
             } else {
                 map.removeLayer(topographyLayer);
             }
+        });
+        
+        // Monitor zoom level for topography layer (max available at zoom 15)
+        map.on('zoomend', function() {
+            const currentZoom = map.getZoom();
+            
+            // If zoomed beyond level 15 and topography is enabled, disable it
+            if (currentZoom > TOPOGRAPHY_MAX_ZOOM && isTopographyMode) {
+                if (map.hasLayer(topographyLayer)) {
+                    map.removeLayer(topographyLayer);
+                }
+                topographyToggle.checked = false;
+                isTopographyMode = false;
+            }
+            
+            // Disable the toggle button if zoom is too high
+            topographyToggle.disabled = currentZoom > TOPOGRAPHY_MAX_ZOOM;
         });
         
         // Cycling network toggle functionality (regional level)
