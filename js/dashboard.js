@@ -2211,7 +2211,15 @@ function getStyleForFile(layerId, feature) {
             const color = turboColormap(segmentValue);
             return { color: color, weight: 3, opacity: 0.8 };
         case 'park-boundary':
-            return { color: '#31a354', weight: 2, fillOpacity: 0.1 };
+            // Check if this is a pocket park (< 4000 m²)
+            const parkArea = feature && feature.properties && feature.properties['Total Area (m²)'];
+            if (parkArea !== undefined && parkArea !== null && parkArea < 4000) {
+                // Pocket parks: dashed dark purple line
+                return { color: '#714a6d', weight: 2, fillOpacity: 0.1, dashArray: '5,5' };
+            } else {
+                // Regular parks: green line
+                return { color: '#31a354', weight: 2, fillOpacity: 0.1 };
+            }
         case 'park-features':
             return { color: '#714a6d', weight: 2, fillColor: '#714a6d', fillOpacity: 0.3, opacity: 0.7 };
         case 'buffer':

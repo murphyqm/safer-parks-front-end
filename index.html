@@ -1830,11 +1830,30 @@ cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","p
                 };
                 
                 mapState.allParksLayer = L.geoJSON(allParksGeoJSON, {
-                    style: {
-                        color: '#4F6C37',
-                        weight: 4,
-                        opacity: 1,
-                        fillOpacity: 0.5
+                    style: function(feature) {
+                        // Check if this is a pocket park (< 4000 m²)
+                        const area = feature.properties.area;
+                        console.log(`Park: ${feature.properties.name}, Area: ${area}`);
+                        if (area !== null && area !== undefined && area < 4000) {
+                            // Pocket parks: dashed dark purple
+                            console.log(`  -> Styling as POCKET PARK (dashed purple)`);
+                            return {
+                                color: '#714a6d',
+                                weight: 2,
+                                opacity: 1,
+                                fillOpacity: 0.1,
+                                dashArray: '5,5'
+                            };
+                        } else {
+                            // Regular parks: solid green
+                            console.log(`  -> Styling as REGULAR PARK (solid green)`);
+                            return {
+                                color: '#4F6C37',
+                                weight: 4,
+                                opacity: 1,
+                                fillOpacity: 0.5
+                            };
+                        }
                     },
                     onEachFeature: (feature, layer) => {
                         layer.bindPopup(`<strong>${feature.properties.name}</strong>`);
@@ -1941,12 +1960,32 @@ cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","p
             
             // Create layer with prominent styling
             mapState.parksLayer = L.geoJSON(parkFeature, {
-                style: {
-                    color: '#4F6C37',
-                    weight: 3,
-                    opacity: 0.9,
-                    fillOpacity: 0,
-                    fillColor: '#4F6C37'
+                style: function(feature) {
+                    // Check if this is a pocket park (< 4000 m²)
+                    const area = selectedPark.properties['Total Area (m²)'] || selectedPark.properties.area_m2 || selectedPark.properties['Area (m2)'] || selectedPark.properties.total_area;
+                    console.log(`Individual park: ${selectedPark.name}, Area: ${area}`, selectedPark.properties);
+                    if (area !== null && area !== undefined && area < 4000) {
+                        // Pocket parks: dashed dark purple
+                        console.log(`  -> Styling SELECTED park as POCKET PARK (dashed purple)`);
+                        return {
+                            color: '#714a6d',
+                            weight: 3,
+                            opacity: 0.9,
+                            fillOpacity: 0,
+                            fillColor: '#714a6d',
+                            dashArray: '5,5'
+                        };
+                    } else {
+                        // Regular parks: solid green
+                        console.log(`  -> Styling SELECTED park as REGULAR PARK (solid green)`);
+                        return {
+                            color: '#4F6C37',
+                            weight: 3,
+                            opacity: 0.9,
+                            fillOpacity: 0,
+                            fillColor: '#4F6C37'
+                        };
+                    }
                 },
                 onEachFeature: (feature, layer) => {
                     layer.bindPopup(`<strong>${feature.properties.name}</strong>`, { closeButton: true });
